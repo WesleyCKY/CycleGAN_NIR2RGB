@@ -1,0 +1,60 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+,
+        
+        {
+            "name": "Python: Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/test-NIR.py",
+            "console": "integratedTerminal",
+            "args": ["--dataroot", "C:/Users/wesle/fyp/CycleGAN_NIR_clean/data/NIR_VCIP_Challenge_dataset/Validation",
+                    "--checkpoints_dir", "C:/Users/wesle/fyp/Experiments/CycleGAN-NIR_ResNet_4/checkpoints/",
+                    "--results_dir", "C:/Users/wesle/fyp/Experiments/CycleGAN-NIR_denseNet_4/checkpoints/result_debug/",
+                    "--name", "NIR2RGB_denseNet",  
+                    "--netG", "seflUnet256_RGB2NIR_ResBlocks",]                      
+                    //"--model","cycle_gan",]
+        }
+,
+        {
+            "name": "Python: Train",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/train-NIR.py",
+            "console": "integratedTerminal",
+            "args": ["--dataroot", "C:/Users/wesle/fyp/CycleGAN_NIR_clean/data/NIR_VCIP_Challenge_dataset",
+                    "--checkpoints_dir", "C:/Users/wesle/fyp/Experiments/CycleGAN-NIR_NI2RRGB_ResNet4/checkpoints/",
+                    "--netG","seflUnet256_RGB2NIR_ResBlocks",               //ResBlocks embeded in UNet (proposed method)
+                    //"--netG","seflUnet256_RGB2NIR_DenseBlocks",           //denseBlocks embeded in UNet (Alternative method)
+                    //"--netG","selfunet_256",                              //Baseline UNet256
+                    "--netD","basic",
+                    "--display_port","8097",
+                    "--n_epochs", "10",
+                    "--n_epochs_decay", "10",
+                    "--display_freq","50",
+                    "--print_freq","50",
+                    "--lr","0.0001",
+                    "--lambda_A","10",
+                    "--lambda_B","10",
+                    "--name","ResNet_embed",
+                    "--batch_size","1",
+                    //"--no_visdom",
+                    "--epoch_count", "0",
+                    // "--continue_train",
+                ]
+        }
+
+    ]
+}
